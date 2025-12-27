@@ -1,60 +1,53 @@
-Telecom Churn - Limpeza e Tratamento de Dados
-Este projeto foca-se na etapa de Data Wrangling de um conjunto de dados de uma empresa de telecomunicações. O objetivo principal é transformar dados brutos (formato JSON aninhado) num formato estruturado, limpo e pronto para etapas futuras de análise exploratória e modelagem de Machine Learning para previsão de Churn (cancelamento de clientes).
+# Telecom Churn - Limpeza e Tratamento de Dados
 
-🛠️ Tecnologias Utilizadas
-Python 3
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
 
-Pandas: Manipulação e análise de dados.
+Este repositório contém um projeto focado na etapa de **Data Wrangling** (limpeza e preparação) de dados de uma empresa de telecomunicações. O objetivo principal é transformar dados brutos no formato JSON em um DataFrame estruturado e limpo, pronto para processos de análise exploratória e modelagem preditiva de *Churn*.
 
-NumPy: Operações matemáticas e tratamento de valores nulos.
+## 🚀 Visão Geral
 
-📋 Etapas do Projeto
-O notebook está organizado seguindo um fluxo lógico de tratamento de dados:
+O projeto aborda o desafio comum de manipular dados hierárquicos (JSON aninhado). Através do uso de bibliotecas de análise de dados, realizei a extração, tratamento de inconsistências e a engenharia de atributos necessária para que os dados possam ser interpretados por algoritmos de Machine Learning.
 
-Carregamento e Normalização:
+## 🛠️ Etapas do Desenvolvimento
 
-Leitura de dados brutos em formato JSON.
+O notebook segue o seguinte fluxo de trabalho:
 
-Uso de json_normalize para transformar dicionários aninhados em colunas individuais (ex: dados de cliente, telefone e internet).
+1.  **Carregamento e Normalização**:
+    * Importação dos dados brutos.
+    * Utilização da função `json_normalize` para achatar as estruturas de dicionários (como `cliente`, `telefone`, `internet` e `conta`) em colunas separadas.
 
-Identificação e Tratamento de Dados Vazios:
+2.  **Limpeza Inicial**:
+    * Identificação e remoção de registros com a variável alvo (`Churn`) vazia.
+    * Tratamento de duplicatas no conjunto de dados.
 
-Deteção de strings vazias na variável alvo (Churn) e remoção de registos irrelevantes.
+3.  **Tratamento de Dados Faltantes e Tipagem**:
+    * Identificação de valores nulos (`NaN`) em colunas como `cliente.tempo_servico`.
+    * Conversão de tipos de dados (ex: transformar strings numéricas em `float64`).
+    * Tratamento de espaços vazios que não foram capturados como nulos inicialmente.
 
-Tratamento de valores NaN em colunas críticas como tempo_servico.
+4.  **Codificação de Variáveis (Encoding)**:
+    * Mapeamento de variáveis binárias (sim/nao) para valores numéricos `0` e `1`.
+    * Aplicação de técnicas de criação de variáveis *dummy* para atributos categóricos multiclasse (ex: tipo de contrato e método de pagamento).
 
-Conversão de Tipos:
+5.  **Análise e Remoção de Outliers**:
+    * Uso de técnicas estatísticas e visualização com `boxplot` para identificar valores atípicos em colunas como `tempo_servico`.
+    * Filtragem de outliers para garantir a qualidade estatística dos dados.
 
-Transformação de colunas numéricas que estavam carregadas como objetos (ex: cobranca.Total).
+## 📁 Estrutura do Arquivo Original
 
-Codificação de Variáveis (Encoding):
+Os dados originais possuem informações sobre:
+- **ID e Churn**: Identificação do cliente e se ele cancelou o serviço.
+- **Cliente**: Gênero, se é idoso, se possui parceiro ou dependentes e tempo de serviço.
+- **Serviços**: Detalhes sobre serviço de telefone, internet, segurança online, streaming, etc.
+- **Faturamento**: Tipo de contrato, método de pagamento e valores das faturas.
 
-Mapeamento de variáveis categóricas binárias (sim/nao, masculino/feminino) para valores numéricos 0 e 1.
+## ⚙️ Como utilizar
 
-Aplicação de técnicas para lidar com variáveis multicategóricas (ex: métodos de pagamento e tipos de contrato).
+1. Certifique-se de ter o Python e o Pandas instalados.
+2. Coloque o arquivo `dataset-telecon.json` na mesma pasta do notebook.
+3. Execute as células do notebook `Limpeza_tratamento_churn_.ipynb` sequencialmente.
 
-Remoção de Outliers:
-
-Análise estatística e remoção de valores atípicos que poderiam enviesar modelos futuros.
-
-🚀 Como Executar
-Clone o repositório:
-
-Bash
-
-git clone https://github.com/seu-usuario/telecom-churn-data-cleaning.git
-Instale as dependências:
-
-Bash
-
-pip install pandas numpy
-Certifique-se de que o ficheiro dataset-telecon.json está no mesmo diretório ou ajuste o caminho no notebook.
-
-📊 Estrutura do Dataset Original
-O dataset original continha informações sobre:
-
-Cliente: Género, idade, se possui parceiro ou dependentes.
-
-Serviços: Telefone, múltiplas linhas, internet, segurança online, backup, streaming, etc.
-
-Conta: Tipo de contrato, método de pagamento e valores de cobrança (mensal e total).# telecom-churn-data-cleaning
+---
+Desenvolvido como parte de um estudo sobre preparação de dados para Ciência de Dados.
